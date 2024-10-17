@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController nameC = TextEditingController();
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: 'honey.png',
                         color: AppColors.ContainerColor,
                         route: AddBasket(
-                          image: 'honey.png',
+                          images: 'honey.png',
                           title: 'Honey Lime combo',
                           price: '2,000',
                         ),
@@ -172,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         image: 'berry.png',
                         color: AppColors.ContainerColor,
                         route: AddBasket(
-                          image: 'berry.png',
+                          images: 'berry.png',
                           title: 'Berry mango combo',
                           price: '8,000',
                         ),
@@ -193,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           image: 'Quinoa.png',
                           color: AppColors.Container1Color,
                           route: AddBasket(
-                            image: 'Quinoa.png',
+                            images: 'Quinoa.png',
                             title: 'Quinoa fruit salad',
                             price: '10,000',
                           ),
@@ -204,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           image: 'Tropical.png',
                           color: AppColors.Container2Color,
                           route: AddBasket(
-                            image: 'Tropical.png',
+                            images: 'Tropical.png',
                             title: 'Tropical fruit salad',
                             price: '10,000',
                           ),
@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           image: 'melo.png',
                           color: AppColors.Container3Color,
                           route: AddBasket(
-                            image: 'melo.png',
+                            images: 'melo.png',
                             title: 'Melo fruit salad',
                             price: '10,000',
                           ),

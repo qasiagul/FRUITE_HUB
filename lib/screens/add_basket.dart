@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruite_hub_ecommerce_app/components/colors.dart';
 import 'package:fruite_hub_ecommerce_app/customs/custom_addbutton.dart';
 import 'package:fruite_hub_ecommerce_app/customs/custome_button.dart';
 import 'package:fruite_hub_ecommerce_app/screens/order_list.dart';
 
 class AddBasket extends StatefulWidget {
-  AddBasket({required this.image, required this.title, required this.price});
-  final String image;
+  AddBasket({required this.images, required this.title, required this.price});
+  final String images;
   final String title;
   final String price;
   @override
@@ -15,6 +14,7 @@ class AddBasket extends StatefulWidget {
 }
 
 class _AddBasketState extends State<AddBasket> {
+  bool isfav = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,20 +34,16 @@ class _AddBasketState extends State<AddBasket> {
                       // color: Colors.red,
                       height: 200,
                       width: 200,
-                      child: SvgPicture.asset("assets/images/tropical.svg") ,
-
-                      // decoration: const BoxDecoration(
-                      //     color: Colors.orange,
-                      //     shape: BoxShape.circle,
-                      //     image: DecorationImage(image: )
-                          // image: DecorationImage(
-                            
-                          //     image: AssetImage(
-                          //       'assets/images/${widget.image}',
-                                
-                          //     ),
-                          //     fit: BoxFit.cover)
-                              // ),
+                      // child: SvgPicture.asset("assets/images/tropical.svg") 
+                      decoration: BoxDecoration(
+                          color: Colors.orange,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: AssetImage(
+                                'assets/images/${widget.images}'
+                              ),
+                              fit: BoxFit.cover)
+                              ),
                     ),
                   ),
                 ],
@@ -130,6 +126,10 @@ class _AddBasketState extends State<AddBasket> {
                               onTap: () {
                                 setState(() {
                                   //here fav logic
+                                   
+                                   setState(() {
+                                     isfav =! isfav;
+                                   });
                                 });
                               },
                               child: Container(
@@ -139,8 +139,9 @@ class _AddBasketState extends State<AddBasket> {
                                   shape: BoxShape.circle,
                                   color: AppColors.Container2Color, // Light orange background
                                 ),
-                                child: const Center(
-                                  child: Icon(Icons.favorite_border_outlined,
+                                child:  Center(
+                                  child: Icon(
+                                    isfav ? Icons.favorite : Icons.favorite_border_outlined,
                                       size: 19,
                                       color:AppColors.themeColor), // Orange plus icon
                                 ),

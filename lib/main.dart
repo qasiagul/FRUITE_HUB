@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruite_hub_ecommerce_app/customs/product_card.dart';
 import 'package:fruite_hub_ecommerce_app/screens/splash_screen.dart';
 
 void main() {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home:ProductCard(),
     );
   }
 }
