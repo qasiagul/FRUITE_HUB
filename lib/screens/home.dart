@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:fruite_hub_ecommerce_app/components/colors.dart';
 import 'package:fruite_hub_ecommerce_app/components/images.dart';
 import 'package:fruite_hub_ecommerce_app/customs/custom_card.dart';
-import 'package:fruite_hub_ecommerce_app/customs/custom_tabs.dart';
 import 'package:fruite_hub_ecommerce_app/screens/add_basket.dart';
+import 'package:fruite_hub_ecommerce_app/screens/fav_screen.dart';
+
+import '../data/data.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,18 +14,33 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController nameC = TextEditingController();
-  
+  List _categories =
+      productList.map((product) => product.category).toSet().toList();
+  int selectedIndex = -1;
+  List<Product> _filteredList = [];
+  updateFilteredList(String category) {
+    _filteredList =
+        productList.where((product) => product.category == category).toList();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         leading: Builder(
           builder: (context) => InkWell(
-              onTap: () {
-                Scaffold.of(context).openDrawer();
-              },
-              child:Image.asset('assets/icons/menu.png',width: 22,height: 11,),
-              ),
+            onTap: () {
+              Scaffold.of(context).openDrawer();
+            },
+            child: Image.asset(
+              'assets/icons/menu.png',
+              width: 22,
+              height: 11,
+            ),
+          ),
         ),
         actions: [
           Padding(
@@ -60,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.home),
+              leading: Icon(Icons.home,color: AppColors.themeColor,),
               title: Text('Home'),
               onTap: () {
                 // Handle the navigation to Home
@@ -68,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
+              leading: Icon(Icons.settings,color: AppColors.themeColor,),
               title: Text('Settings'),
               onTap: () {
                 // Handle the navigation to Settings
@@ -76,11 +93,19 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.info),
+              leading: Icon(Icons.info,color: AppColors.themeColor,),
               title: Text('About'),
               onTap: () {
                 // Handle the navigation to About
                 Navigator.pop(context); // Close the drawer
+              },
+            ),
+                        ListTile(
+              leading: Icon(Icons.favorite,color: AppColors.themeColor,),
+              title: Text('Favorite'),
+              onTap: () {
+                // Handle the navigation to About
+                Navigator.push(context, MaterialPageRoute(builder: (context) => FavItems() )); // Close the drawer
               },
             ),
           ],
@@ -136,7 +161,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(  width:18), // Adding some space between TextField and Icon
+                      const SizedBox(
+                          width:
+                              18), // Adding some space between TextField and Icon
                       AppImages.filterIcon,
                     ],
                   ),
@@ -179,49 +206,67 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  const TabBarSection(),
                   const SizedBox(
-                    height: 40,
+                    height: 20,
+                  ),
+                  SizedBox(
+                    width: screenWidth * 5,
+                    height: screenHeight * 0.1,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _categories.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              updateFilteredList(_categories[index]);
+                              setState(() {
+                                selectedIndex = index;
+                              });
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: selectedIndex == index
+                                          ? AppColors.themeColor
+                                          : Colors.white,
+                                      width: selectedIndex == index ? 3.0 : 0.0,
+                                    ),
+                                  ),
+                                ),
+                                child: Text(
+                                  _categories[index],
+                                  style: TextStyle(
+                                    fontSize: selectedIndex == index
+                                        ? 32
+                                        : 22, //change font size
+                                    color: selectedIndex == index
+                                        ? AppColors.headingColor
+                                        : AppColors.greyColor,
+                                    fontWeight: selectedIndex == index
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        FruitComboCard(
-                          title: 'Quinoa fruit salad',
-                          price: '10,000',
-                          image: 'Quinoa.png',
-                          color: AppColors.Container1Color,
-                          route: AddBasket(
-                            images: 'Quinoa.png',
-                            title: 'Quinoa fruit salad',
-                            price: '10,000',
-                          ),
-                        ),
-                        FruitComboCard(
-                          title: 'Tropical fruit salad',
-                          price: '10,000',
-                          image: 'Tropical.png',
-                          color: AppColors.Container2Color,
-                          route: AddBasket(
-                            images: 'Tropical.png',
-                            title: 'Tropical fruit salad',
-                            price: '10,000',
-                          ),
-                        ),
-                        FruitComboCard(
-                          title: 'Melo fruit salad',
-                          price: '10,000',
-                          image: 'melo.png',
-                          color: AppColors.Container3Color,
-                          route: AddBasket(
-                            images: 'melo.png',
-                            title: 'Melo fruit salad',
-                            price: '10,000',
-                          ),
-                        ),
-                      ],
-                    ),
+                      child:  Row(
+                          children: _filteredList.map((e) {
+                        return FruitComboCard(
+                            title: e.title,
+                            price: e.price.toString(),
+                            image: e.imageUrl,
+                            color: e.color,
+                            route: e.route);
+                      }).toList())  
+                  
                   ),
                 ],
               ),
@@ -232,5 +277,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-

@@ -1,31 +1,36 @@
-// import 'package:flutter/material.dart';
-// import 'package:fruite_hub_ecommerce_app/customs/custom_card.dart';
 
-// class FavoriteScreen extends StatelessWidget {
-//   final List<FruitComboCard> favoriteCards;
+import 'package:flutter/material.dart';
 
-//   FavoriteScreen({required this.favoriteCards});
+import '../customs/custom_card.dart';
+import '../data/data.dart';
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("Favorite Cards"),
-//       ),
-//       body: favoriteCards.isEmpty
-//           ? Center(child: Text("No favorite cards yet."))
-//           : ListView.builder(
-//               itemCount: favoriteCards.length,
-//               itemBuilder: (context, index) {
-//                 final card = favoriteCards[index];
-//                 return Card(
-//                   child: ListTile(
-//                     title: Text(card.title),
-//                     subtitle: Text(card.description),
-//                   ),
-//                 );
-//               },
-//             ),
-//     );
-//   }
-// }
+class FavItems extends StatelessWidget {
+    List<Product> _favItems = [];
+  updateFavItems() {
+    _favItems = productList.where((product) => product.isFav).toList();
+  }
+   FavItems({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body:  Column(
+        children: [
+          SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                          child:  Row(
+                              children: _favItems.map((e) {
+                            return FruitComboCard(
+                                title: e.title,
+                                price: e.price.toString(),
+                                image: e.imageUrl,
+                                color: e.color,
+                                route: e.route);
+                          }).toList())  
+                      
+                      ),
+        ],
+      ),
+    );
+  }
+}
