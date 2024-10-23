@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruite_hub_ecommerce_app/components/colors.dart';
 import 'package:fruite_hub_ecommerce_app/customs/custome_button.dart';
-import 'package:fruite_hub_ecommerce_app/screens/signup.dart';
+import 'package:fruite_hub_ecommerce_app/screens/login.dart';
 
 
 class OnBoarding extends StatelessWidget {
@@ -76,7 +76,7 @@ class OnBoarding extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 40,),
-          CustomButton(text: 'Lets Continue', widget: Signup(),),
+          CustomButton(text: 'Lets Continue', widget: LoginScreen(),),
           const SizedBox(height: 50,),
         ],
       ),

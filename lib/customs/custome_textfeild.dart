@@ -8,15 +8,13 @@ import 'package:fruite_hub_ecommerce_app/components/colors.dart';
     final TextEditingController  controller;
     final String text ;
     final Icon? icon;
-    
-
-    const TextFeildCustom({super.key, required this.controller, required this.text, this.icon});
-  
+    final bool? obscureText;
+    const TextFeildCustom({super.key, required this.controller, required this.text, this.icon, this.obscureText,});
     @override
     Widget build(BuildContext context) {
       return TextField(
                 controller:controller,
-                obscureText: true,
+                obscureText:obscureText?? false,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor:AppColors.fillColor,

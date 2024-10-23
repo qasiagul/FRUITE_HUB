@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fruite_hub_ecommerce_app/components/colors.dart';
 import 'package:fruite_hub_ecommerce_app/components/images.dart';
@@ -5,6 +6,7 @@ import 'package:fruite_hub_ecommerce_app/customs/custom_card.dart';
 import 'package:fruite_hub_ecommerce_app/screens/add_basket.dart';
 import 'package:fruite_hub_ecommerce_app/screens/fav_screen.dart';
 
+import '../data/auth.dart';
 import '../data/data.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,6 +15,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+   
+   final User? user = Auth().currentUser;
+
+   Future<void> signOut()async{
+    await Auth().signOut();
+   }
+
+
   final TextEditingController nameC = TextEditingController();
   List _categories =
       productList.map((product) => product.category).toSet().toList();
@@ -85,11 +95,12 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings,color: AppColors.themeColor,),
-              title: Text('Settings'),
+              leading: Icon(Icons.logout,color: AppColors.themeColor,),
+              title: Text('LogOut'),
               onTap: () {
-                // Handle the navigation to Settings
-                Navigator.pop(context); // Close the drawer
+                setState(() {
+                  signOut();
+                });
               },
             ),
             ListTile(

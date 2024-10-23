@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "737972637895",
+    "project_id": "fruitefubecommerceapp",
+    "storage_bucket": "fruitefubecommerceapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737972637895:android:e7d12eca8d2737a5f72ee2",
+        "android_client_info": {
+          "package_name": "com.example.fruite_hub_ecommerce_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARjvEMCdwR-Vi0yqNj-ZUKTblRcY3azGk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

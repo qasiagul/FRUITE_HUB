@@ -15,8 +15,7 @@ class CustomButton extends StatelessWidget {
     return  InkWell(
           onTap: () {
             // login logic
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => widget));
+            
           },
           child: Container(
             width: containerWidth?? 327,
@@ -66,5 +65,42 @@ class GoBack extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+
+class TextFeildButton extends StatelessWidget {
+
+  final String text; 
+  final VoidCallback function;
+  final double? containerWidth;
+  final Color? background;
+  final Color? color;
+   TextFeildButton({super.key, required this.text, required this.function, this.containerWidth, this.background, this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return  InkWell(
+          onTap: () {
+            // login logic
+            
+          },
+          child: Container(
+            width: containerWidth?? 327,
+            height: 56,
+            decoration: BoxDecoration(
+                color:background?? AppColors.themeColor,
+                border: Border.all(color: AppColors.themeColor,width: 1),
+                borderRadius: BorderRadius.circular(10)),
+            child: Center(
+                child: Text(
+              text,
+              style: TextStyle(
+                  color:color?? Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal),
+            )),
+          ),
+        );
   }
 }
